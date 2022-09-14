@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.assignment.ui.theme.AssignmentTheme
+import com.example.assignment.ui.theme.ProductScreen
 import com.example.assignment.ui.theme.Result
 import com.example.assignment.ui.theme.loginPage
 import kotlin.concurrent.thread
@@ -42,7 +43,7 @@ class MainActivity : ComponentActivity() {
                // loginPage()
                 loginPage {
                     this.setContent{
-                        Result()
+                        ProductScreen()
                     }
                 }
             }
