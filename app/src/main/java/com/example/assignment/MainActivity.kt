@@ -22,6 +22,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.assignment.data.dataOfUsers
+import com.example.assignment.data.loadData
 import com.example.assignment.ui.theme.AssignmentTheme
 import com.example.assignment.ui.theme.ProductScreen
 import com.example.assignment.ui.theme.Result
@@ -36,17 +38,25 @@ class MainActivity : ComponentActivity() {
            // loginPage()
             startScreen(text = "Romano")
         }
+
+        loadData(this)
         thread {
             Thread.sleep(2000)
-            context.setContent {
-               // loginPage{this.setContent{Result()}}
-               // loginPage()
-                loginPage {
-                    this.setContent{
-                        ProductScreen()
+
+            if (dataOfUsers.userNameData.isEmpty() && dataOfUsers.passwordData.isEmpty()) {
+                context.setContent {
+                    loginPage(this) {
+                        context.setContent {
+                            ProductScreen()
+                        }
                     }
                 }
+            } else {
+                context.setContent {
+                    ProductScreen()
+                }
             }
+
         }
 
     }

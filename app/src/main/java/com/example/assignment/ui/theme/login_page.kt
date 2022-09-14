@@ -1,5 +1,6 @@
 package com.example.assignment.ui.theme
 
+import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,6 +9,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionContext
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -15,9 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.assignment.data.dataOfUsers
+import com.example.assignment.data.saveData
 
 @Composable
-fun loginPage(onClickLambda: () -> Unit = {}) {
+fun loginPage(context: Context, onClickLambda: () -> Unit = {}) {
     val userNam = mutableListOf("User Name", "Enter User Name")
     val passwordList = mutableListOf("password", "Enter password")
 
@@ -43,6 +46,7 @@ fun loginPage(onClickLambda: () -> Unit = {}) {
             if (status) {
                 Log.d("Romano", "loginPage: $status")
                 openDialog.value = false
+                saveData(context, dataOfUsers.userNameData, dataOfUsers.passwordData)
                 onClickLambda()
             } else {
                 openDialog.value = true
@@ -95,6 +99,7 @@ fun displayLogin(list: List<String>, type: String) {
             } else {
                 dataOfUsers.passwordData = inputValue.value
             }
+
         }
     }
 }
