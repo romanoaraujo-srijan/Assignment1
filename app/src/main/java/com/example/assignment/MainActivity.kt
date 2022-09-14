@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
         thread {
             Thread.sleep(2000)
 
+
             if (dataOfUsers.userNameData.isEmpty() && dataOfUsers.passwordData.isEmpty()) {
                 context.setContent {
                     loginPage(this) {
