@@ -24,10 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.assignment.data.dataOfUsers
 import com.example.assignment.data.loadData
-import com.example.assignment.ui.theme.AssignmentTheme
-import com.example.assignment.ui.theme.ProductScreen
-import com.example.assignment.ui.theme.Result
-import com.example.assignment.ui.theme.loginPage
+import com.example.assignment.ui.theme.*
 import kotlin.concurrent.thread
 
 class MainActivity : ComponentActivity() {
@@ -36,13 +33,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
            // loginPage()
+            //Log.d("romano", "onCreate: ${R.drawable.fitbit}")
             startScreen(text = "Romano")
         }
-
+        readJsonData(this)
         loadData(this)
+        //readJsonData(this)
         thread {
             Thread.sleep(2000)
-
 
             if (dataOfUsers.userNameData.isEmpty() && dataOfUsers.passwordData.isEmpty()) {
                 context.setContent {
@@ -59,7 +57,6 @@ class MainActivity : ComponentActivity() {
             }
 
         }
-
     }
 }
 

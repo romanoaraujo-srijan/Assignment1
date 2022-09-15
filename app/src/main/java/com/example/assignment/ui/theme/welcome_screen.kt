@@ -1,5 +1,6 @@
 package com.example.assignment.ui.theme
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -57,7 +58,9 @@ fun ProductScreen(){
     convertToArray() //Convert JSON to Kotlin Array
 
     //Main Column
-    Column(modifier = Modifier.fillMaxSize().background(Color.Black)) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.Black)) {
         for (i in 1..numberOfRows) DrawHomeRows()
     }
 }
@@ -65,7 +68,9 @@ fun ProductScreen(){
 @Composable
 fun DrawHomeRows(){
     Row {
-        Box(modifier = Modifier.fillMaxWidth(0.5f).padding(10.dp)) {
+        Box(modifier = Modifier
+            .fillMaxWidth(0.5f)
+            .padding(10.dp)) {
             DrawHomeEachColumn()
         }
         Box(modifier = Modifier.padding(10.dp)) {
@@ -77,6 +82,7 @@ fun DrawHomeRows(){
 @Composable //Generates Each individual card in of each column in a row
 fun DrawHomeEachColumn() {
     index++
+    //Log.d("romi", "DrawHomeEachColumn:  ${R.}")
     Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(8.dp)) {
         Column(
             modifier = Modifier.height(200.dp),
@@ -84,7 +90,11 @@ fun DrawHomeEachColumn() {
             verticalArrangement = Arrangement.Center
         ) {
             Image(
+
                 painter = painterResource(id = productList[index].imageUrl.toInt()),
+
+                  //painter =  painterResource(id = 2130968577),
+               // painter = painterResource(id = productList[index].imageUrl),
                 contentDescription = "",
                 contentScale = ContentScale.Fit)
             Text(text = productList[index].productName)

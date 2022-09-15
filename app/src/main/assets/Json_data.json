@@ -1,0 +1,18 @@
+[
+  {
+    "productName": "apple",
+    "imageUrl": "2130968577"
+  },
+  {
+    "productName": "samsung",
+    "imageUrl": "2130968593"
+  },
+  {
+    "productName": "fitbit",
+    "imageUrl": "2130968578"
+  } ,
+  {
+    "productName": "xiaomi",
+    "imageUrl": "2130968594"
+  }
+]

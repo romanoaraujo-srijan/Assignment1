@@ -9,7 +9,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionContext
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -37,7 +36,6 @@ fun loginPage(context: Context, onClickLambda: () -> Unit = {}) {
         displayLogin(list = passwordList, type = "password")
 
         Button(onClick = {
-            extractJsonData()
             val status = validateUser(dataOfUsers.userNameData, dataOfUsers.passwordData)
            // val status = validateUser("romano","romi6996")
             //val one = dataOfUsers.userNameData
