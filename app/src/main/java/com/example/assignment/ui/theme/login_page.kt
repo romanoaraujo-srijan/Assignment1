@@ -15,11 +15,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.assignment.Screens
 import com.example.assignment.data.dataOfUsers
 import com.example.assignment.data.saveData
 
 @Composable
-fun loginPage(context: Context, onClickLambda: () -> Unit = {}) {
+fun loginPage(context: Context, navController: NavController) {
     val userNam = mutableListOf("User Name", "Enter User Name")
     val passwordList = mutableListOf("password", "Enter password")
 
@@ -30,22 +32,21 @@ fun loginPage(context: Context, onClickLambda: () -> Unit = {}) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        val openDialog = remember{mutableStateOf(false)}
+        val openDialog = remember { mutableStateOf(false) }
 
         displayLogin(list = userNam, type = "login")
         displayLogin(list = passwordList, type = "password")
 
         Button(onClick = {
             val status = validateUser(dataOfUsers.userNameData, dataOfUsers.passwordData)
-           // val status = validateUser("romano","romi6996")
-            //val one = dataOfUsers.userNameData
-           // val two = dataOfUsers.passwordData
-           // Log.d("Romano", "loginPage: $one  and $two ")
             if (status) {
                 Log.d("Romano", "loginPage: $status")
-                openDialog.value = false
                 saveData(context, dataOfUsers.userNameData, dataOfUsers.passwordData)
-                onClickLambda()
+                navController.navigate(route = Screens.welcome_screen.route) {
+                    popUpTo(Screens.login_page.route) {
+                        inclusive = true
+                    }
+                }
             } else {
                 openDialog.value = true
             }
@@ -53,7 +54,7 @@ fun loginPage(context: Context, onClickLambda: () -> Unit = {}) {
         }) {
             Text(text = "LOGIN")
         }
-        if(openDialog.value){
+        if (openDialog.value) {
             AlertDialog(
                 onDismissRequest = {
                     openDialog.value = false
@@ -88,8 +89,8 @@ fun displayLogin(list: List<String>, type: String) {
         Column(modifier = Modifier.padding(10.dp)) {
             val inputValue = remember { mutableStateOf("") }
             TextField(
-                value = inputValue.value ,
-                onValueChange = {inputValue.value = it},
+                value = inputValue.value,
+                onValueChange = { inputValue.value = it },
                 label = { Text(text = list[1]) }
             )
             if (type == "login") {

@@ -1,103 +1,76 @@
 package com.example.assignment.ui.theme
 
-import android.util.Log
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.assignment.data.dataOfUsers
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import coil.compose.rememberImagePainter
 
-data class Product(var productName: String, var imageUrl: String)
+import com.google.gson.annotations.SerializedName
+
+data class Product(
+    @SerializedName("title")
+    var productName: String,
+    @SerializedName("image")
+    var imageUrl: String
+)
 
 var index = -1
-lateinit var productList: Array<Product>
-fun convertToArray(){
-    var gson = Gson()
-    val typeToken = object : TypeToken<Array<Product>>(){}.type
-    productList = gson.fromJson(data, typeToken)
-
-//    for (value in productList){
-//        Log.d("Romano", "convertToArray: ${value.productName}")
-//    }
-}
-
-@Composable
-fun Result(){
-    Surface(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.DarkGray)) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = "Your Input")
-            Text(text = dataOfUsers.userNameData)
-        }
-    }
-}
-
-
 
 //Home Screen
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ProductScreen(){
-    val numberOfRows = 2
+fun productScreen() {
 
-    convertToArray() //Convert JSON to Kotlin Array
+    // var newList = productList ?: listOf<Product>()
+    LazyVerticalGrid(
+        cells = GridCells.Fixed(2),
+        modifier = Modifier.background(Color.Cyan),
+        content = {
+            items(productList!!.size) { index ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(250.dp)
+                        .padding(5.dp),
+                    elevation = 10.dp,
+                    shape = RoundedCornerShape(20.dp),
+                    border = BorderStroke(3.dp, Color.Black),
+                ) {
+                    Image(
+                        painter = rememberImagePainter(productList!![index].imageUrl),
+                        contentDescription = "",
+                        contentScale = ContentScale.Fit
+                    )
 
-    //Main Column
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.Black)) {
-        for (i in 1..numberOfRows) DrawHomeRows()
-    }
-}
-
-@Composable
-fun DrawHomeRows(){
-    Row {
-        Box(modifier = Modifier
-            .fillMaxWidth(0.5f)
-            .padding(10.dp)) {
-            DrawHomeEachColumn()
-        }
-        Box(modifier = Modifier.padding(10.dp)) {
-            DrawHomeEachColumn()
-        }
-    }
-}
-
-@Composable //Generates Each individual card in of each column in a row
-fun DrawHomeEachColumn() {
-    index++
-    //Log.d("romi", "DrawHomeEachColumn:  ${R.}")
-    Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(8.dp)) {
-        Column(
-            modifier = Modifier.height(200.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Image(
-
-                painter = painterResource(id = productList[index].imageUrl.toInt()),
-
-                  //painter =  painterResource(id = 2130968577),
-               // painter = painterResource(id = productList[index].imageUrl),
-                contentDescription = "",
-                contentScale = ContentScale.Fit)
-            Text(text = productList[index].productName)
-        }
-    }
+                    Box(
+                        contentAlignment = Alignment.BottomCenter,
+                        modifier = Modifier.background(
+                            Brush.verticalGradient(
+                                colors = listOf(Color.Transparent, Color.DarkGray),
+                                startY = 400f
+                            )
+                        )
+                    ) {
+                        Text(
+                            text = productList!![index].productName,
+                            modifier = Modifier.padding(5.dp),
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+                }
+            }
+        })
 }
