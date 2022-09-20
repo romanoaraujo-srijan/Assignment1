@@ -65,4 +65,3 @@ fun startScreen(navController: NavController, context: Context, text: String = "
         }
     }
 }
-

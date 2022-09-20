@@ -1,4 +1,4 @@
-package com.example.assignment.ui.theme
+package com.example.assignment.view
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -16,17 +16,22 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.example.assignment.ui.theme.productList
 
 import com.google.gson.annotations.SerializedName
-
+//
+//data class Product(
+//    @SerializedName("title")
+//    var productName: String,
+//    @SerializedName("image")
+//    var imageUrl: String
+//)
 data class Product(
     @SerializedName("title")
     var productName: String,
     @SerializedName("image")
     var imageUrl: String
 )
-
-var index = -1
 
 //Home Screen
 @OptIn(ExperimentalFoundationApi::class)

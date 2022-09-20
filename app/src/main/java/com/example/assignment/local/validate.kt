@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.layout.ColumnScope
 import com.example.assignment.ApiInterface
 import com.example.assignment.data.Data
+import com.example.assignment.view.Product
 import com.google.gson.Gson
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,7 +15,7 @@ lateinit var userCheck: Data
 fun extractJsonData() {
     val gson = Gson()
     userCheck = gson.fromJson(json, Data::class.java)
-   // userCheck = jsonObj.fromJson(json, Data::class.java)
+    // userCheck = jsonObj.fromJson(json, Data::class.java)
     Log.d("Romano", "user check: ${userCheck.userNameData}")
 }
 

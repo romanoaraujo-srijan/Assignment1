@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
 import com.example.assignment.ui.theme.loginPage
-import com.example.assignment.ui.theme.productScreen
+import com.example.assignment.view.productScreen
 
 @Composable
 fun navigation(navController: NavHostController, context: Context) {

@@ -102,4 +102,3 @@ fun displayLogin(list: List<String>, type: String) {
         }
     }
 }
-
