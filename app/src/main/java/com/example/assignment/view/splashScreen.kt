@@ -1,5 +1,6 @@
 package com.example.assignment
 
+import SplashScreenViewModel
 import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.background
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -18,16 +20,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.assignment.data.dataOfUsers
-import com.example.assignment.data.loadData
+import androidx.navigation.NavHostController
+
+
 import com.example.assignment.ui.theme.*
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.delay
 
 
 @Composable
-fun startScreen(navController: NavController, context: Context, text: String = "Romano") {
+fun startScreen(context: Context, navHostController: NavHostController, splashScreenViewModel: SplashScreenViewModel, text: String = "Romano", ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -44,24 +45,24 @@ fun startScreen(navController: NavController, context: Context, text: String = "
             )
         )
     }
-
-    LaunchedEffect(key1 = true) {
-        Log.d("romano", "startScreen: $data")
-
-        delay(1000)
-
-        if (dataOfUsers.userNameData.isEmpty() && dataOfUsers.passwordData.isEmpty()) {
-            navController.navigate(route = Screens.login_page.route) {
-                popUpTo(Screens.Start_Screen.route) {
-                    inclusive = true
-                }
-            }
-        } else {
-            navController.navigate(route = Screens.welcome_screen.route) {
-                popUpTo(Screens.Start_Screen.route) {
-                    inclusive = true
-                }
-            }
-        }
-    }
+    splashScreenViewModel.execute(rememberCoroutineScope(),context,navHostController)
+//
+//    LaunchedEffect(key1 = true) {
+//        Log.d("romano", "startScreen: $data")
+//
+//        delay(1000)
+//
+//        if (dataOfUsers.userNameData.isEmpty() && dataOfUsers.passwordData.isEmpty()) {
+//            navController.navigate(route = Screens.login_page.route) {
+//                popUpTo(Screens.Start_Screen.route) {
+//                    inclusive = true
+//                }
+//            }
+//        } else {
+//            navController.navigate(route = Screens.welcome_screen.route) {
+//                popUpTo(Screens.Start_Screen.route) {
+//                    inclusive = true
+//                }
+//            }
+//        }
 }

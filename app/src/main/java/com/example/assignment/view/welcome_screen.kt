@@ -1,5 +1,6 @@
 package com.example.assignment.view
 
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
@@ -16,7 +17,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.example.assignment.ui.theme.getApiData
 import com.example.assignment.ui.theme.productList
+
 
 import com.google.gson.annotations.SerializedName
 //
@@ -37,8 +40,6 @@ data class Product(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun productScreen() {
-
-    // var newList = productList ?: listOf<Product>()
     LazyVerticalGrid(
         cells = GridCells.Fixed(2),
         modifier = Modifier.background(Color.Cyan),
@@ -78,4 +79,5 @@ fun productScreen() {
                 }
             }
         })
+    Log.d("Romproducts", "productScreen: ")
 }
